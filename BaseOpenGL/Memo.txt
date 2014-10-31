@@ -1,2 +1,0 @@
-- Light.h
-- Light.cpp
