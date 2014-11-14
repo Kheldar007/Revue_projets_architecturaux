@@ -17,23 +17,15 @@
 class Light
 {
 	protected :
-		/**
-		 * @brief directionalLight Lumiere directionnelle.
-		 */
-		glm::mat4 directionalLight ;
-		/**
-		 * @brief positionalLight Lumiere positionnelle.
-		 */
-		glm::mat4 positionalLight ;
+		glm::vec3 ambient ;
+		glm::vec3 diffuse ;
+		glm::vec3 specular ;
+		float	  shininess ;
+		glm::vec4 position ; // Si w = 0 : source directionnelle , si w = 1 : source positionnelle.
 	public :
-		/**
-		 * @brief Constructeur.
-		 */
 		Light () ;
-		/**
-		 * @brief Destructeur.
-		 */
 		~Light () ;
+		glm::vec4 getPosition () {return position ;}
 } ;
 
 

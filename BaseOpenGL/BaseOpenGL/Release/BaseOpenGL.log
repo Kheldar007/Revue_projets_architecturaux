@@ -1,19 +1,10 @@
-﻿La génération a démarré 31/10/2014 17:44:25.
+﻿La génération a démarré 2014-11-14 09:51:57.
      1>Projet "C:\Users\IsabelleA.C\Documents\Université\Logiciels et materiels graphiques\Projet\BaseOpenGL\BaseOpenGL\BaseOpenGL.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../../glfw-3.0.2.bin.WIN32/include" /I"../../glew-1.7.0/include" /I"../../glm-0.9.2.4" /I../../soil/src /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\BaseOpenGL.pch" /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
-         stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../freeglut-2.6.0\include" /I"../glew-1.7.0\include" /I"../glm-0.9.2.4" /I"../../glfw-3.0.2.bin.WIN32/include" /I"../../glew-1.7.0/include" /I"../../glm-0.9.2.4" /I../../soil/src /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\BaseOpenGL.pch" /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt BaseOpenGL.cpp
          BaseOpenGL.cpp
      1>BaseOpenGL.cpp(160): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
      1>BaseOpenGL.cpp(161): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../../glfw-3.0.2.bin.WIN32/include" /I"../../glew-1.7.0/include" /I"../../glm-0.9.2.4" /I../../soil/src /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\BaseOpenGL.pch" /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp Light.cpp ObjectMaterial.cpp Shader.cpp ShaderProgram.cpp BasicRenderableObject.cpp
-         Camera.cpp
-         Light.cpp
-         ObjectMaterial.cpp
-         Shader.cpp
-         ShaderProgram.cpp
-         BasicRenderableObject.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\IsabelleA.C\Documents\Université\Logiciels et materiels graphiques\Projet\BaseOpenGL\Release\BaseOpenGL.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"../../glfw-3.0.2.bin.WIN32/lib-msvc100" /LIBPATH:"../../glew-1.7.0/lib" /LIBPATH:../../soil/projects/VC9/Release glew32.lib glfw3dll.lib opengl32.lib SOIL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\IsabelleA.C\Documents\Université\Logiciels et materiels graphiques\Projet\BaseOpenGL\Release\BaseOpenGL.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\IsabelleA.C\Documents\Université\Logiciels et materiels graphiques\Projet\BaseOpenGL\Release\BaseOpenGL.lib" /MACHINE:X86 /SAFESEH Release\BaseOpenGL.obj
          Release\Camera.obj
@@ -30,4 +21,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:08.28
+Temps écoulé 00:00:03.25

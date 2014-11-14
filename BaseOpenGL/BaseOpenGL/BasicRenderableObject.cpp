@@ -385,7 +385,7 @@ void BasicRenderableObject::createVertexArrayObject()
 	printGLErrors("BasicRenderableObject::createVertexArrayObject() end");
 }
 
-void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix)
+void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light)
 {
 	m_ShaderProgram->startUseProgram();
 
@@ -406,6 +406,13 @@ void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatri
 		GLint indexOfAmbientMap = glGetUniformLocation(m_ShaderProgram->programId(), "ambientMap");
 		GLint indexOfDiffuseMap = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseMap");
 		GLint indexOfBumpMap = glGetUniformLocation(m_ShaderProgram->programId(), "bumpMap");
+
+		GLint indexOfLightPosition = glGetUniformLocation(m_ShaderProgram->programId(), "lightPosition");
+
+		if(indexOfLightPosition >= 0)
+		{
+			glUniform4fv(indexOfLightPosition, 1, glm::value_ptr(light->getPosition()));
+		}
 
 		if(indexOfAmbientColor >= 0)
 		{

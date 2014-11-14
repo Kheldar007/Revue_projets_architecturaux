@@ -8,6 +8,7 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 
 uniform vec3 diffuseColor;
+uniform vec4 lightPosition;
 
 out vec2 uv_out;
 out vec4 color_out;

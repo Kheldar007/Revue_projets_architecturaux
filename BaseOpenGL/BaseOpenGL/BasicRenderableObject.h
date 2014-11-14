@@ -2,6 +2,7 @@
 #define VBO_OBJECT_H
 
 #include "stdafx.h"
+# include "Light.h"
 #include "ShaderProgram.h"
 #include "ObjectMaterial.h"
 
