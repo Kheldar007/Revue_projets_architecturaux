@@ -29,6 +29,8 @@ double			g_PreviousTime;
 
 Camera*			g_Camera;
 
+Light*			g_Light;
+
 BasicRenderableObject*				g_MainObject;
 
 
@@ -76,7 +78,7 @@ void display()
 
 	g_CurrentTime = glfwGetTime();
 
-	g_MainObject->draw(g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix());
+	g_MainObject->draw(g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	
 	g_PreviousTime = g_CurrentTime;
 
@@ -157,8 +159,8 @@ void mouseMove_callback(GLFWwindow* window, double x, double y)
 		g_Camera->rotateLocal((float)yAngle * 0.5f, 1.0f, 0.0f, 0.0f);
 	}
 
-	g_PreviousXPosition = x;
-	g_PreviousYPosition = y;
+	g_PreviousXPosition = (float) x;
+	g_PreviousYPosition = (float) y;
 }
 
 

@@ -17,15 +17,18 @@
 class Light
 {
 	protected :
-		glm::vec3 ambient ;
-		glm::vec3 diffuse ;
-		glm::vec3 specular ;
-		float	  shininess ;
-		glm::vec4 position ; // Si w = 0 : source directionnelle , si w = 1 : source positionnelle.
+		glm::vec3 l_ambiant;
+		glm::vec3 l_diffuse;
+		glm::vec3 l_specular;
+		float	  l_shininess;
+		glm::vec4 l_position; // Si w = 0 : source directionnelle , si w = 1 : source positionnelle.
 	public :
-		Light () ;
+		Light  () ;
 		~Light () ;
-		glm::vec4 getPosition () {return position ;}
+		glm::vec4 getAmbiant()  {return l_ambiant;}
+		glm::vec4 getDiffuse()  {return l_diffuse;}
+		glm::vec4 getPosition() {return l_position;}
+		glm::vec4 getSpecular() {return l_specular;}
 } ;
 
 

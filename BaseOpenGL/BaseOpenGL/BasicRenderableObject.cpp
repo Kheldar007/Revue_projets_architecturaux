@@ -406,8 +406,8 @@ void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatri
 		GLint indexOfAmbientMap = glGetUniformLocation(m_ShaderProgram->programId(), "ambientMap");
 		GLint indexOfDiffuseMap = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseMap");
 		GLint indexOfBumpMap = glGetUniformLocation(m_ShaderProgram->programId(), "bumpMap");
-
 		GLint indexOfLightPosition = glGetUniformLocation(m_ShaderProgram->programId(), "lightPosition");
+		GLint indexOfLightAmbiant = glGetUniformLocation(m_ShaderProgram->programId(), "lightAmbiant");
 
 		if(indexOfLightPosition >= 0)
 		{

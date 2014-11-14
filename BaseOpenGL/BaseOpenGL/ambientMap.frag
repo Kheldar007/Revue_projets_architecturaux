@@ -3,6 +3,7 @@
 uniform sampler2D ambientMap;
 uniform sampler2D diffuseMap;
 uniform sampler2D bumpMap;
+uniform lightAmbiant;
 
 in vec2 uv_out;
 in vec4 color_out;
