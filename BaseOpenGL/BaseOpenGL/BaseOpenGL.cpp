@@ -64,8 +64,8 @@ void initialiseObjects()
 
 	g_MainObject->initShader( ShaderProgram::createAmbientMapShader() );
 	g_MainObject->init();
-	g_MainObject->loadMtl("Models/sibenik_blenderexport.mtl");
-	g_MainObject->loadObj("Models/sibenik_blenderexport.obj");
+	g_MainObject->loadMtl("Models/USSEnterprise.mtl");
+	g_MainObject->loadObj("Models/USSEnterprise.obj");
 	g_MainObject->fillInVBO();
 	g_MainObject->createVertexArrayObject();
 

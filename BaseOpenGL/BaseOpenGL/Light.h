@@ -25,10 +25,10 @@ class Light
 	public :
 		Light  () ;
 		~Light () ;
-		glm::vec4 getAmbiant()  {return l_ambiant;}
-		glm::vec4 getDiffuse()  {return l_diffuse;}
+		glm::vec3 getAmbiant()  {return l_ambiant;}
+		glm::vec3 getDiffuse()  {return l_diffuse;}
 		glm::vec4 getPosition() {return l_position;}
-		glm::vec4 getSpecular() {return l_specular;}
+		glm::vec3 getSpecular() {return l_specular;}
 } ;
 
 
