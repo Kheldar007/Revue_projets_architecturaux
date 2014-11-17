@@ -78,7 +78,7 @@ void display()
 
 	g_CurrentTime = glfwGetTime();
 
-	g_MainObject->draw(g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+	g_MainObject->draw(g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix()/* , g_Light*/);
 	
 	g_PreviousTime = g_CurrentTime;
 
