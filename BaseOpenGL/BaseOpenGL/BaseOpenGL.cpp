@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "ShaderProgram.h"
 #include "BasicRenderableObject.h"
+#include "SceneGraph.h"
 
 
 
@@ -32,6 +33,9 @@ Camera*			g_Camera;
 Light*			g_Light;
 
 BasicRenderableObject*				g_MainObject;
+BasicRenderableObject*				g_Church;
+
+SceneGraph * g;
 
 
 
@@ -60,14 +64,22 @@ void initialiseObjects()
 	printGLErrors("initialiseObjects() start");
 
 	// creation du VBO
-	g_MainObject = new BasicRenderableObject();
 
+	g_MainObject = new BasicRenderableObject();
 	g_MainObject->initShader( ShaderProgram::createAmbientMapShader() );
 	g_MainObject->init();
 	g_MainObject->loadMtl("Models/USSEnterprise.mtl");
 	g_MainObject->loadObj("Models/USSEnterprise.obj");
 	g_MainObject->fillInVBO();
 	g_MainObject->createVertexArrayObject();
+
+	g_Church = new BasicRenderableObject();
+	g_Church->initShader(ShaderProgram::createAmbientMapShader());
+	g_Church->init();
+	g_Church->loadMtl("Models/sibenik_blenderexport.mtl");
+	g_Church->loadObj("Models/sibenik_blenderexport.obj");
+	g_Church->fillInVBO();
+	g_Church->createVertexArrayObject();
 
 	printGLErrors("initialiseObjects() end");
 }
@@ -78,7 +90,7 @@ void display()
 
 	g_CurrentTime = glfwGetTime();
 
-	g_MainObject->draw(g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix()/* , g_Light*/);
+	g_MainObject->draw(g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	
 	g_PreviousTime = g_CurrentTime;
 

@@ -385,7 +385,7 @@ void BasicRenderableObject::createVertexArrayObject()
 	printGLErrors("BasicRenderableObject::createVertexArrayObject() end");
 }
 
-void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix/* , Light * light*/)
+void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light)
 {
 	m_ShaderProgram->startUseProgram();
 
@@ -406,13 +406,30 @@ void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatri
 		GLint indexOfAmbientMap = glGetUniformLocation(m_ShaderProgram->programId(), "ambientMap");
 		GLint indexOfDiffuseMap = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseMap");
 		GLint indexOfBumpMap = glGetUniformLocation(m_ShaderProgram->programId(), "bumpMap");
-		/*GLint indexOfLightPosition = glGetUniformLocation(m_ShaderProgram->programId(), "lightPosition");
-		GLint indexOfLightAmbiant = glGetUniformLocation(m_ShaderProgram->programId(), "lightAmbiant");
+		GLint indexOfLightPosition = glGetUniformLocation(m_ShaderProgram->programId(), "lightPosition");
+		GLint indexOfLightAmbient = glGetUniformLocation(m_ShaderProgram->programId(), "lightAmbient");
+		GLint indexOfLightDiffuse = glGetUniformLocation(m_ShaderProgram->programId(), "lightDiffuse");
+		GLint indexOfLightSpecular = glGetUniformLocation(m_ShaderProgram->programId(), "lightSpecular");
 
 		if(indexOfLightPosition >= 0)
 		{
 			glUniform4fv(indexOfLightPosition, 1, glm::value_ptr(light->getPosition()));
-		}*/
+		}
+
+		if(indexOfLightAmbient >= 0)
+		{
+			glUniform3fv(indexOfLightAmbient, 1, glm::value_ptr(light->getAmbient()));
+		}
+
+		if(indexOfLightDiffuse >= 0)
+		{
+			glUniform3fv(indexOfLightDiffuse, 1, glm::value_ptr(light->getDiffuse()));
+		}
+
+		if(indexOfLightSpecular >= 0)
+		{
+			glUniform3fv(indexOfLightSpecular, 1, glm::value_ptr(light->getSpecular()));
+		}
 
 		if(indexOfAmbientColor >= 0)
 		{

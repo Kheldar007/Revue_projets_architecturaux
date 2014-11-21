@@ -1,9 +1,3 @@
-/**
- * @file    Light.h
- * @author  Nicolas Brunnemer, Isabelle Muller
- */
-
-
 # ifndef LIGHT_H
 # define LIGHT_H
 
@@ -17,7 +11,7 @@
 class Light
 {
 	protected :
-		glm::vec3 l_ambiant;
+		glm::vec3 l_ambient;
 		glm::vec3 l_diffuse;
 		glm::vec3 l_specular;
 		float	  l_shininess;
@@ -25,10 +19,11 @@ class Light
 	public :
 		Light  () ;
 		~Light () ;
-		glm::vec3 getAmbiant()  {return l_ambiant;}
-		glm::vec3 getDiffuse()  {return l_diffuse;}
-		glm::vec4 getPosition() {return l_position;}
-		glm::vec3 getSpecular() {return l_specular;}
+		glm::vec3 getAmbient()   {return l_ambient;}
+		glm::vec3 getDiffuse()   {return l_diffuse;}
+		glm::vec4 getPosition()  {return l_position;}
+		glm::vec3 getSpecular()  {return l_specular;}
+		float     getShininess() {return l_shininess;}
 } ;
 
 

@@ -47,7 +47,7 @@ public :
 	void fillInVBO();
 	void createVertexArrayObject();
 
-	virtual void draw(glm::mat4	viewMatrix, glm::mat4 projectionMatrix/*, Light * light*/);
+	virtual void draw(glm::mat4	viewMatrix, glm::mat4 projectionMatrix, Light * light);
 } ;
 
 #endif
