@@ -14,9 +14,6 @@ uniform float shininess;
 
 uniform vec4 lightPosition;
 
-// sampler2D diffuseMap;
-// sampler2D lightMap;
-
 in vec2 uv_out;
 in vec3 normal_out;
 in vec4 worldPosition;
@@ -42,13 +39,7 @@ void main()
 	float rva = pow (rv , shininess);
 	vec3 specular = rva * lightSpecular * specularColor ;
 
-	vec4 phong = vec4 (ambient , 1) + vec4 (diffuse , 1) + vec4 (specular , 1) ;
-
-	// vec4 color = texture2D(diffuseMap, uv);
-	// vec4 lightObscurance = texture2D(lightMap, uv);
-
 	// color_final = color_out * textureColor;
+	color_final = vec4 (ambient , 1) + vec4 (diffuse , 1) + vec4 (specular , 1) ;
 	// color_final = vec4 (normal_out,1.0);
-	color_final = phong;
-	// color_final = color * lightObscurance;
 }

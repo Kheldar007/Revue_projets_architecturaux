@@ -491,17 +491,6 @@ void BasicRenderableObject::draw(glm::mat4 modelMatrix , glm::mat4 viewMatrix, g
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	glGenTextures(1, &m_idTex);
-	glBindTexture(GL_TEXTURE_2D, m_idTex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 10, 10, 0 , GL_RGBA, GL_FLOAT, imgRawData);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
