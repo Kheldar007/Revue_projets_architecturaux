@@ -385,13 +385,15 @@ void BasicRenderableObject::createVertexArrayObject()
 	printGLErrors("BasicRenderableObject::createVertexArrayObject() end");
 }
 
-void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light) // Rajouter une matrice.
+void BasicRenderableObject::draw(glm::mat4 modelMatrix , glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light) // Rajouter une matrice.
 {
 	m_ShaderProgram->startUseProgram();
-
-	GLint indexOfProjectionMatrix = glGetUniformLocation(m_ShaderProgram->programId(), "projectionMatrix");
-	GLint indexOfViewMatrix = glGetUniformLocation(m_ShaderProgram->programId(), "viewMatrix");
-
+	
+	GLint indexOfModelMatrix		 = glGetUniformLocation(m_ShaderProgram->programId(), "modelMatrix");
+	GLint indexOfProjectionMatrix	 = glGetUniformLocation(m_ShaderProgram->programId(), "projectionMatrix");
+	GLint indexOfViewMatrix			 = glGetUniformLocation(m_ShaderProgram->programId(), "viewMatrix");
+	
+	glUniformMatrix4fv(indexOfModelMatrix, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 	glUniformMatrix4fv(indexOfProjectionMatrix, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 	glUniformMatrix4fv(indexOfViewMatrix, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 

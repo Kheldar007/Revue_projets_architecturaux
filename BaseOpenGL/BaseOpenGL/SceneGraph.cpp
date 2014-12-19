@@ -4,6 +4,7 @@
 
 SceneGraph::SceneGraph ()
 {
+	modelMatrix = glm::mat4 () ;
 }
 
 SceneGraph::~SceneGraph ()
