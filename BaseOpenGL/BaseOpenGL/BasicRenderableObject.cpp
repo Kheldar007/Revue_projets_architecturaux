@@ -393,9 +393,9 @@ void BasicRenderableObject::draw(glm::mat4 modelMatrix , glm::mat4 viewMatrix, g
 	GLint indexOfProjectionMatrix	 = glGetUniformLocation(m_ShaderProgram->programId(), "projectionMatrix");
 	GLint indexOfViewMatrix			 = glGetUniformLocation(m_ShaderProgram->programId(), "viewMatrix");
 	
-	glUniformMatrix4fv(indexOfModelMatrix, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-	glUniformMatrix4fv(indexOfProjectionMatrix, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-	glUniformMatrix4fv(indexOfViewMatrix, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+	glUniformMatrix4fv(indexOfModelMatrix,		 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	glUniformMatrix4fv(indexOfProjectionMatrix,	 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+	glUniformMatrix4fv(indexOfViewMatrix,		 1, GL_FALSE, glm::value_ptr(viewMatrix));
 
 	glBindVertexArray(m_Vao);
 
