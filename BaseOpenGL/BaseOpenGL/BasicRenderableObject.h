@@ -35,6 +35,7 @@ protected :
 	std::vector<ObjectMaterial*>	m_Materials;
 
 	GLuint							m_idTex;
+	float							imgRawData [10 * 10 * 4] ;
 	
 public :
 	BasicRenderableObject() { } ;
