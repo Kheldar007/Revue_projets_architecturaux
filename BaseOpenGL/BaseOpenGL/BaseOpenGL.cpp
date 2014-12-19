@@ -30,7 +30,7 @@ double			g_PreviousTime;
 
 Camera*			g_Camera;
 
-Light*			g_Light;
+Light*			g_Light = new Light ();
 
 BasicRenderableObject*				g_MainObject;
 BasicRenderableObject*				g_Church;

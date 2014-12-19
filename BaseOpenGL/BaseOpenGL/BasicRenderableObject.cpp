@@ -385,7 +385,7 @@ void BasicRenderableObject::createVertexArrayObject()
 	printGLErrors("BasicRenderableObject::createVertexArrayObject() end");
 }
 
-void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light)
+void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light) // Rajouter une matrice.
 {
 	m_ShaderProgram->startUseProgram();
 
@@ -399,17 +399,17 @@ void BasicRenderableObject::draw(glm::mat4 viewMatrix, glm::mat4 projectionMatri
 
 	for(unsigned int i = 0; i < m_SubObjectsVBOTriangles.size(); ++i)
 	{
-		GLint indexOfAmbientColor = glGetUniformLocation(m_ShaderProgram->programId(), "ambientColor");
-		GLint indexOfDiffuseColor = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseColor");
-		GLint indexOfSpecularColor = glGetUniformLocation(m_ShaderProgram->programId(), "specularColor");
-		GLint indexOfShininess = glGetUniformLocation(m_ShaderProgram->programId(), "shininess");
-		GLint indexOfAmbientMap = glGetUniformLocation(m_ShaderProgram->programId(), "ambientMap");
-		GLint indexOfDiffuseMap = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseMap");
-		GLint indexOfBumpMap = glGetUniformLocation(m_ShaderProgram->programId(), "bumpMap");
-		GLint indexOfLightPosition = glGetUniformLocation(m_ShaderProgram->programId(), "lightPosition");
-		GLint indexOfLightAmbient = glGetUniformLocation(m_ShaderProgram->programId(), "lightAmbient");
-		GLint indexOfLightDiffuse = glGetUniformLocation(m_ShaderProgram->programId(), "lightDiffuse");
-		GLint indexOfLightSpecular = glGetUniformLocation(m_ShaderProgram->programId(), "lightSpecular");
+		GLint indexOfAmbientColor	 = glGetUniformLocation(m_ShaderProgram->programId(), "ambientColor");
+		GLint indexOfDiffuseColor	 = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseColor");
+		GLint indexOfSpecularColor	 = glGetUniformLocation(m_ShaderProgram->programId(), "specularColor");
+		GLint indexOfShininess 		 = glGetUniformLocation(m_ShaderProgram->programId(), "shininess");
+		GLint indexOfAmbientMap		 = glGetUniformLocation(m_ShaderProgram->programId(), "ambientMap");
+		GLint indexOfDiffuseMap		 = glGetUniformLocation(m_ShaderProgram->programId(), "diffuseMap");
+		GLint indexOfBumpMap		 = glGetUniformLocation(m_ShaderProgram->programId(), "bumpMap");
+		GLint indexOfLightPosition	 = glGetUniformLocation(m_ShaderProgram->programId(), "lightPosition");
+		GLint indexOfLightAmbient	 = glGetUniformLocation(m_ShaderProgram->programId(), "lightAmbient");
+		GLint indexOfLightDiffuse	 = glGetUniformLocation(m_ShaderProgram->programId(), "lightDiffuse");
+		GLint indexOfLightSpecular	 = glGetUniformLocation(m_ShaderProgram->programId(), "lightSpecular");
 
 		if(indexOfLightPosition >= 0)
 		{

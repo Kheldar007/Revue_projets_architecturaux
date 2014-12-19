@@ -7,20 +7,16 @@ in vec2 uv_in;
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 
-uniform vec3 diffuseColor;
-uniform vec3 ambientColor;
-uniform vec3 specularColor;
-uniform float shininess;
-uniform vec4 lightPosition;
-
 out vec2 uv_out;
-out vec4 color_out;
 out vec3 normal_out;
+out vec4 worldPosition;
+out vec4 eyePosition;
 
 void main()
 {
-	gl_Position = projectionMatrix * viewMatrix * vec4(vertex_in, 1.0);
-	color_out = vec4(diffuseColor, 1.0);
+	worldPosition = /* modelMatrix * */ vec4 (vertex_in , 1);
+	eyePosition = viewMatrix * worldPosition;
+	gl_Position = projectionMatrix * eyePosition;
 	uv_out = uv_in;
 	normal_out = normal_in;
 }

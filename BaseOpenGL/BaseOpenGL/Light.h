@@ -14,7 +14,6 @@ class Light
 		glm::vec3 l_ambient;
 		glm::vec3 l_diffuse;
 		glm::vec3 l_specular;
-		float	  l_shininess;
 		glm::vec4 l_position; // Si w = 0 : source directionnelle , si w = 1 : source positionnelle.
 	public :
 		Light  () ;
@@ -23,7 +22,6 @@ class Light
 		glm::vec3 getDiffuse()   {return l_diffuse;}
 		glm::vec4 getPosition()  {return l_position;}
 		glm::vec3 getSpecular()  {return l_specular;}
-		float     getShininess() {return l_shininess;}
 } ;
 
 
