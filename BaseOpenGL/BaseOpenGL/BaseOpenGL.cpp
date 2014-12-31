@@ -31,6 +31,7 @@ double			g_PreviousTime;
 Camera*			g_Camera;
 
 Light*			g_Light = new Light ();
+Light*			g_Light2 = new Light ();
 
 BasicRenderableObject*				g_Enterprise;
 BasicRenderableObject*				g_Church;
@@ -58,6 +59,8 @@ void initialiseGLState()
 	glDisable(GL_BLEND);
 
 	g_Camera = new Camera((float)g_width, (float)g_height);
+	g_Light2 -> setPosition (-0.75 , 0.5 , 0. , 0.) ;
+	g_Light2 -> setDiffuse (1 , 0. , 0.) ;
 
 	printGLErrors("initialiseGLState() end");
 }
@@ -94,7 +97,7 @@ void display()
 
 	g_CurrentTime = glfwGetTime();
 
-	g_Enterprise->draw(g_Enterprise -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+	g_Enterprise->draw(g_Enterprise -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light2);
 	g_Church->draw(g_Church -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	
 	g_PreviousTime = g_CurrentTime;
