@@ -33,6 +33,8 @@ protected :
 
 	int								m_CurrentMaterial;
 	std::vector<ObjectMaterial*>	m_Materials;
+
+	glm::mat4						m_ModelMatrix;
 	
 public :
 	BasicRenderableObject() { } ;
@@ -47,7 +49,17 @@ public :
 	void fillInVBO();
 	void createVertexArrayObject();
 
+	void translateLocalObject(float x, float y, float z) { m_ModelMatrix = glm::translate(x, y, z) * m_ModelMatrix; }
+	void translateGlobalObject(float x, float y, float z) { m_ModelMatrix = m_ModelMatrix * glm::translate(x, y, z); }
+
+	void rotateGlobalObject(float angle, float x, float y, float z) { m_ModelMatrix = m_ModelMatrix * glm::rotate(angle, x, y, z); }
+	void rotateLocalObject(float angle, float x, float y, float z) { m_ModelMatrix = glm::rotate(angle, x, y, z) * m_ModelMatrix; }
+
+	glm::mat4 getModelMatrix () {return m_ModelMatrix ;}
+
 	virtual void draw(glm::mat4	modelMatrix , glm::mat4	viewMatrix, glm::mat4 projectionMatrix, Light * light);
+
+	std::vector<GLuint> getSubObjectsVBOTriangles () {return m_SubObjectsVBOTriangles ;}
 } ;
 
 #endif

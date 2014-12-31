@@ -22,6 +22,10 @@ class Light
 		glm::vec3 getDiffuse()   {return l_diffuse;}
 		glm::vec4 getPosition()  {return l_position;}
 		glm::vec3 getSpecular()  {return l_specular;}
+		void setAmbiant (float a , float b , float c) ;
+		void setDiffuse (float a , float b , float c) ;
+		void setPosition (float a , float b , float c , float d) ;
+		void setSpecular (float a , float b , float c) ;
 } ;
 
 

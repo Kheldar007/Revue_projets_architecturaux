@@ -32,8 +32,11 @@ Camera*			g_Camera;
 
 Light*			g_Light = new Light ();
 
-BasicRenderableObject*				g_MainObject;
+BasicRenderableObject*				g_Enterprise;
 BasicRenderableObject*				g_Church;
+
+enum mode {CAMERA , ENTERPRISE , CHURCH} ;
+enum mode currentMode = ENTERPRISE ;
 
 SceneGraph * g = new SceneGraph () ;
 
@@ -65,13 +68,14 @@ void initialiseObjects()
 
 	// creation du VBO
 
-	g_MainObject = new BasicRenderableObject();
-	g_MainObject->initShader( ShaderProgram::createAmbientMapShader() );
-	g_MainObject->init();
-	g_MainObject->loadMtl("Models/USSEnterprise.mtl");
-	g_MainObject->loadObj("Models/USSEnterprise.obj");
-	g_MainObject->fillInVBO();
-	g_MainObject->createVertexArrayObject();
+	g_Enterprise = new BasicRenderableObject();
+	g_Enterprise->initShader( ShaderProgram::createAmbientMapShader() );
+	g_Enterprise->init();
+	g_Enterprise->loadMtl("Models/USSEnterprise.mtl");
+	g_Enterprise->loadObj("Models/USSEnterprise.obj");
+	g_Enterprise->fillInVBO();
+	g_Enterprise->createVertexArrayObject();
+	g_Enterprise -> rotateLocalObject (90 , 0 , 1 , 0) ;
 
 	g_Church = new BasicRenderableObject();
 	g_Church->initShader(ShaderProgram::createAmbientMapShader());
@@ -90,7 +94,8 @@ void display()
 
 	g_CurrentTime = glfwGetTime();
 
-	g_MainObject->draw(g -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+	g_Enterprise->draw(g_Enterprise -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+	g_Church->draw(g_Church -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	
 	g_PreviousTime = g_CurrentTime;
 
@@ -106,21 +111,80 @@ void resize(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if(key == GLFW_KEY_UP && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	if ((key == 'e') && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		g_Camera->translateLocal(0.0f, 0.0f, 1.0f);
+		std::cout << "touche e" << std::endl ;
+		currentMode = ENTERPRISE ;
+	}
+	else if ((key == 'c') && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	{
+		std::cout << "touche c" << std::endl ;
+		currentMode = CHURCH ;
+	}
+	else if ((key == 'a') && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	{
+		std::cout << "touche a" << std::endl ;
+		currentMode = CAMERA ;
+	}
+	else if(key == GLFW_KEY_UP && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	{
+		if (currentMode == CAMERA)
+		{
+			g_Camera->translateLocal(0.0f, 0.0f, 1.0f);
+		}
+		else if (currentMode == ENTERPRISE)
+		{
+			g_Enterprise->translateLocalObject(0.0f, 0.0f, 1.0f);
+		}
+		else if (currentMode == CHURCH)
+		{
+			g_Church->translateLocalObject(0.0f, 0.0f, 1.0f);
+		}
 	}
 	if(key == GLFW_KEY_DOWN && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		g_Camera->translateLocal(0.0f, 0.0f, -1.0f);
+		if (currentMode == CAMERA)
+		{
+			g_Camera->translateLocal(0.0f, 0.0f, -1.0f);
+		}
+		else if (currentMode == ENTERPRISE)
+		{
+			g_Enterprise->translateLocalObject(0.0f, 0.0f, -1.0f);
+		}
+		else if (currentMode == CHURCH)
+		{
+			g_Church->translateLocalObject(0.0f, 0.0f, -1.0f);
+		}
 	}
 	if(key == GLFW_KEY_LEFT && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		g_Camera->translateLocal(1.0f, 0.0f, 0.0f);
+		if (currentMode == CAMERA)
+		{
+			g_Camera->translateLocal(1.0f, 0.0f, 0.0f);
+		}
+		else if (currentMode == ENTERPRISE)
+		{
+			g_Enterprise->translateLocalObject(1.0f, 0.0f, 0.0f);
+		}
+		else if (currentMode == CHURCH)
+		{
+			g_Church->translateLocalObject(1.0f, 0.0f, 0.0f);
+		}
 	}
 	if(key == GLFW_KEY_RIGHT && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		g_Camera->translateLocal(-1.0f, 0.0f, 0.0f);
+		if (currentMode == CAMERA)
+		{
+			g_Camera->translateLocal(-1.0f, 0.0f, 0.0f);
+		}
+		else if (currentMode == ENTERPRISE)
+		{
+			g_Enterprise->translateLocalObject(-1.0f, 0.0f, 0.0f);
+		}
+		else if (currentMode == CHURCH)
+		{
+			g_Church->translateLocalObject(-1.0f, 0.0f, 0.0f);
+		}
 	}
 
 	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
