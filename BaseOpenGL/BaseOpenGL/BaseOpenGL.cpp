@@ -36,8 +36,8 @@ Light*			g_Light2 = new Light ();
 BasicRenderableObject*				g_Enterprise;
 BasicRenderableObject*				g_Church;
 
-enum mode {CAMERA , ENTERPRISE , CHURCH} ;
-enum mode currentMode = ENTERPRISE ;
+enum mode {CAMERA , ENTERPRISE , CHURCH} ; // Pour savoir quel objet on selectionne.
+enum mode currentMode = CAMERA ; // Par defaut, l'ensemble de la scene.
 
 SceneGraph * g = new SceneGraph () ;
 
@@ -114,19 +114,16 @@ void resize(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if ((key == 'e') && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	if ((key == GLFW_KEY_E) && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		std::cout << "touche e" << std::endl ;
 		currentMode = ENTERPRISE ;
 	}
-	else if ((key == 'c') && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	else if ((key == GLFW_KEY_C) && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		std::cout << "touche c" << std::endl ;
 		currentMode = CHURCH ;
 	}
-	else if ((key == 'a') && (action == GLFW_PRESS || action == GLFW_REPEAT))
+	else if ((key == GLFW_KEY_A) && (action == GLFW_PRESS || action == GLFW_REPEAT))
 	{
-		std::cout << "touche a" << std::endl ;
 		currentMode = CAMERA ;
 	}
 	else if(key == GLFW_KEY_UP && (action == GLFW_PRESS || action == GLFW_REPEAT))
