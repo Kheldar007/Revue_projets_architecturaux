@@ -57,7 +57,7 @@ public :
 
 	glm::mat4 getModelMatrix () {return m_ModelMatrix ;}
 
-	virtual void draw(glm::mat4	modelMatrix , glm::mat4	viewMatrix, glm::mat4 projectionMatrix, Light * light);
+	virtual void draw(glm::mat4	modelMatrix , glm::mat4	viewMatrix, glm::mat4 projectionMatrix, /*Light ** light, int numberLights*/ Light * light);
 
 	std::vector<GLuint> getSubObjectsVBOTriangles () {return m_SubObjectsVBOTriangles ;}
 } ;

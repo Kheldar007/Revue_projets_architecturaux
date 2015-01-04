@@ -22,6 +22,7 @@ bool			g_LeftButtonPressed;
 bool			g_RightButtonPressed;
 
 double			yAngle = 0.0;
+double			xAngle = 0.0;
 float			sensibilityX = .15f;
 float			sensibilityY = 1.0f;
 
@@ -78,6 +79,7 @@ void initialiseObjects()
 	g_Enterprise->loadObj("Models/USSEnterprise.obj");
 	g_Enterprise->fillInVBO();
 	g_Enterprise->createVertexArrayObject();
+	
 	g_Enterprise -> rotateLocalObject (90 , 0 , 1 , 0) ;
 
 	g_Church = new BasicRenderableObject();
@@ -96,10 +98,12 @@ void display()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	g_CurrentTime = glfwGetTime();
-
-	g_Enterprise->draw(g_Enterprise -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light2);
+	
+	g_Enterprise->draw(g_Enterprise -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	g_Church->draw(g_Church -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	
+	
+
 	g_PreviousTime = g_CurrentTime;
 
 	printGLErrors("Error during drawing");
@@ -134,7 +138,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 		else if (currentMode == ENTERPRISE)
 		{
-			g_Enterprise->translateLocalObject(0.0f, 0.0f, 1.0f);
+			//g_Enterprise->translateGlobalObject(0.0f, 0.0f, 1.0f);
+			
+	g_Enterprise->translateLocalObject(0, -1.5, 0);
+	g_Enterprise -> rotateLocalObject (0.75 , 1 , 0 , 0) ;
+	g_Enterprise->translateLocalObject(0, 1.5, 0);
 		}
 		else if (currentMode == CHURCH)
 		{
@@ -164,7 +172,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 		else if (currentMode == ENTERPRISE)
 		{
-			g_Enterprise->translateLocalObject(1.0f, 0.0f, 0.0f);
+			g_Enterprise->translateGlobalObject(1.0f, 0.0f, 0.0f);
 		}
 		else if (currentMode == CHURCH)
 		{
@@ -224,15 +232,12 @@ void mouseMove_callback(GLFWwindow* window, double x, double y)
 {
 	if(g_LeftButtonPressed)
 	{
-		// on enleve la rotation sur Y pour appliquer la rotation horizontale a plat.
-		g_Camera->rotateLocal((float)yAngle * -0.5f, 1.0f, 0.0f, 0.0f);		
-		
-		yAngle = yAngle + (y - g_PreviousYPosition)* sensibilityY;
-		double xAngle = (x - g_PreviousXPosition) * sensibilityX;
+		xAngle =  ( x - g_PreviousXPosition ) * sensibilityX;
+		yAngle =  ( y - g_PreviousYPosition ) * sensibilityY;
+		g_Camera -> deltaX = xAngle;
+		g_Camera -> deltaY = yAngle;
 
-
-		g_Camera->rotateLocal((float)xAngle * 0.5f, 0.0f, 1.0f, 0.0f);
-		g_Camera->rotateLocal((float)yAngle * 0.5f, 1.0f, 0.0f, 0.0f);
+		g_Camera -> Update();
 	}
 
 	g_PreviousXPosition = (float) x;
@@ -304,8 +309,12 @@ int main(int argc, char* argv[])
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
+        
+		
+
+		/* Render here */
 		display();
+		
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

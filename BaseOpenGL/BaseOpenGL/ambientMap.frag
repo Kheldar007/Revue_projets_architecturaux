@@ -23,8 +23,7 @@ out vec4 color_final;
 
 void main()
 {
-	vec4 textureColor = texture2D(diffuseMap, uv_out); // Pour l'Enterprise.
-	// vec4 textureColor = texture2D(ambientMap, uv_out); // Pour l'eglise.
+	vec4 textureColor = texture2D(diffuseMap, uv_out);
 
 	vec3 ambient = ambientColor * lightAmbient ;
 
@@ -42,4 +41,5 @@ void main()
 	// color_final = color_out * textureColor;
 	color_final = vec4 (ambient , 1) + vec4 (diffuse , 1) + vec4 (specular , 1) ;
 	// color_final = vec4 (normal_out,1.0);
+	color_final = color_final * textureColor ;
 }

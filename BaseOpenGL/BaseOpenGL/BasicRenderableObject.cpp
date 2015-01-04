@@ -385,7 +385,7 @@ void BasicRenderableObject::createVertexArrayObject()
 	printGLErrors("BasicRenderableObject::createVertexArrayObject() end");
 }
 
-void BasicRenderableObject::draw(glm::mat4 modelMatrix , glm::mat4 viewMatrix, glm::mat4 projectionMatrix , Light * light) // Rajouter une matrice.
+void BasicRenderableObject::draw(glm::mat4 modelMatrix , glm::mat4 viewMatrix, glm::mat4 projectionMatrix , /*Light ** lights, int numberLights*/ Light * light) // Rajouter une matrice.
 {
 	m_ShaderProgram->startUseProgram();
 	
