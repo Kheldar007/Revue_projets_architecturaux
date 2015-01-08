@@ -35,9 +35,15 @@ protected :
 	std::vector<ObjectMaterial*>	m_Materials;
 
 	glm::mat4						m_ModelMatrix;
+
+	BasicRenderableObject *			m_parent ;
+
+	// std::vector<BasicRenderableObject*> m_sons;
+
+
 	
 public :
-	BasicRenderableObject() { } ;
+	BasicRenderableObject() {m_parent = NULL ; }
 	~BasicRenderableObject();
 
 	void init();
@@ -49,17 +55,21 @@ public :
 	void fillInVBO();
 	void createVertexArrayObject();
 
-	void translateLocalObject(float x, float y, float z) { m_ModelMatrix = glm::translate(x, y, z) * m_ModelMatrix; }
+	void translateLocalObject(float x, float y, float z) { m_ModelMatrix = glm::translate(x, y, z) * m_ModelMatrix ; }
 	void translateGlobalObject(float x, float y, float z) { m_ModelMatrix = m_ModelMatrix * glm::translate(x, y, z); }
 
-	void rotateGlobalObject(float angle, float x, float y, float z) { m_ModelMatrix = m_ModelMatrix * glm::rotate(angle, x, y, z); }
-	void rotateLocalObject(float angle, float x, float y, float z) { m_ModelMatrix = glm::rotate(angle, x, y, z) * m_ModelMatrix; }
-
-	glm::mat4 getModelMatrix () {return m_ModelMatrix ;}
+	void rotateGlobalObject(float angle, float x, float y, float z);
+	void rotateLocalObject(float angle, float x, float y, float z);
 
 	virtual void draw(glm::mat4	modelMatrix , glm::mat4	viewMatrix, glm::mat4 projectionMatrix, /*Light ** light, int numberLights*/ Light * light);
 
 	std::vector<GLuint> getSubObjectsVBOTriangles () {return m_SubObjectsVBOTriangles ;}
+
+	glm::mat4 getModelMatrix () ;
+
+	void setParent (BasicRenderableObject * obj) {m_parent = obj ;}
+
+	BasicRenderableObject * getParent () {return m_parent ;}
 } ;
 
 #endif

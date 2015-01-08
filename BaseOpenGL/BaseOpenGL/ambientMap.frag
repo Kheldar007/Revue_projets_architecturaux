@@ -25,7 +25,7 @@ void main()
 {
 	vec4 textureColor = texture2D(diffuseMap, uv_out);
 
-	vec3 ambient = ambientColor * lightAmbient ;
+	vec3 ambient = ambientColor * lightAmbient*1.2 ;
 
 	vec3 lightDir = lightPosition.xyz - (worldPosition.xyz * lightPosition.w) ;
 	lightDir = normalize (lightDir) ;

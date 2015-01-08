@@ -4,9 +4,9 @@
 
 Light::Light ()
 {
-	l_ambient  = glm::vec3 (0.2 , 0.2 , 0.2) ;
-	l_diffuse  = glm::vec3 (0.25 , 0.4 , 0.774597) ;
-	l_position = glm::vec4 (0.75 , 15 , 0 , 0) ;
+	l_ambient  = glm::vec3 (0.75 , 0.75 , 0.75) ;
+	l_diffuse  = glm::vec3 (0 , 0 , 1) ;
+	l_position = glm::vec4 (0 , 1 , 0 , 0) ;
 	l_specular = glm::vec3 (0.5 , 0.5 , 0.5) ;
 }
 

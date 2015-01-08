@@ -19,7 +19,6 @@ BasicRenderableObject::~BasicRenderableObject()
 	glDeleteVertexArrays(1, &m_Vao);
 }
 
-
 void BasicRenderableObject::initShader(ShaderProgram* shaderProgram)
 {
 	printGLErrors("BasicRenderableObject::initShader()");
@@ -495,4 +494,45 @@ void BasicRenderableObject::draw(glm::mat4 modelMatrix , glm::mat4 viewMatrix, g
 	glBindVertexArray(0);
 
 	m_ShaderProgram->stopUseProgram();
+}
+
+glm::mat4 BasicRenderableObject::getModelMatrix ()
+{
+	if(getParent() == NULL)
+	{
+		return m_ModelMatrix;
+	}
+	else
+	{
+		return (getParent()->getModelMatrix()) * (m_ModelMatrix);
+	}
+}
+
+void BasicRenderableObject::rotateGlobalObject(float angle, float x, float y, float z)
+{ 
+	// METHODE DE SAGOUIN
+	// on enleve le dernier vecteur --> position
+	// on le stock, on fait la rotation, et on le replace, ni vu ni connu. =D
+	
+	glm::vec4 tmpTranslate;
+	tmpTranslate = m_ModelMatrix[3];
+	
+	m_ModelMatrix[3].x = 0;
+	m_ModelMatrix[3].y = 0;
+	m_ModelMatrix[3].z = 0;
+
+	m_ModelMatrix = m_ModelMatrix * glm::rotate(angle, x, y, z);
+	m_ModelMatrix[3] = tmpTranslate;
+}
+void BasicRenderableObject::rotateLocalObject(float angle, float x, float y, float z) 
+{ 
+	glm::vec4 tmpTranslate;
+	tmpTranslate = m_ModelMatrix[3];
+	
+	m_ModelMatrix[3].x = 0;
+	m_ModelMatrix[3].y = 0;
+	m_ModelMatrix[3].z = 0;
+
+	m_ModelMatrix = glm::rotate(angle, x, y, z) * m_ModelMatrix ;
+	m_ModelMatrix[3] = tmpTranslate;
 }

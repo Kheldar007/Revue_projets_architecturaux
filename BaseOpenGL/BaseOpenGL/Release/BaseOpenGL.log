@@ -1,17 +1,12 @@
-﻿La génération a démarré 2015-01-04 19:12:22.
+﻿La génération a démarré 2015-01-08 19:06:59.
      1>Projet "C:\Users\IsabelleA.C\Documents\Université\Logiciels et materiels graphiques\Projet\BaseOpenGL\BaseOpenGL\BaseOpenGL.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../freeglut-2.6.0\include" /I"../glew-1.7.0\include" /I"../glm-0.9.2.4" /I"../../glfw-3.0.2.bin.WIN32/include" /I"../../glew-1.7.0/include" /I"../../glm-0.9.2.4" /I../../soil/src /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\BaseOpenGL.pch" /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt BaseOpenGL.cpp
          BaseOpenGL.cpp
-     1>BaseOpenGL.cpp(239): error C2065: 'quat' : identificateur non déclaré
-     1>BaseOpenGL.cpp(239): error C2146: erreur de syntaxe : absence de ';' avant l'identificateur 'q'
-     1>BaseOpenGL.cpp(239): error C2065: 'q' : identificateur non déclaré
-     1>BaseOpenGL.cpp(239): error C3083: 'quaternion' : le symbole situé à gauche de '::' doit être un type
-     1>BaseOpenGL.cpp(239): error C2039: 'quad_cast' : n'est pas membre de 'glm::gtc'
-     1>BaseOpenGL.cpp(239): error C3867: &'Camera::GetViewMatrix' : liste d'arguments manquante dans l'appel de fonction ; utilisez 'Camera::GetViewMatrix' pour créer un pointeur vers membre
-     1>BaseOpenGL.cpp(239): error C3861: 'quad_cast' : identificateur introuvable
+     1>BaseOpenGL.cpp(122): error C2039: 'newSons' : n'est pas membre de 'BasicRenderableObject'
+                 c:\users\isabellea.c\documents\université\logiciels et materiels graphiques\projet\baseopengl\baseopengl\BasicRenderableObject.h(13) : voir la déclaration de 'BasicRenderableObject'
      1>Génération du projet "C:\Users\IsabelleA.C\Documents\Université\Logiciels et materiels graphiques\Projet\BaseOpenGL\BaseOpenGL\BaseOpenGL.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
 
 ÉCHEC de la build.
 
-Temps écoulé 00:00:03.84
+Temps écoulé 00:00:04.89

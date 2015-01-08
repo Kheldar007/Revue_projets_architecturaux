@@ -19,5 +19,8 @@ void main()
 	eyePosition = viewMatrix * worldPosition;
 	gl_Position = projectionMatrix * eyePosition;
 	uv_out = uv_in;
-	normal_out = normal_in ;
+	// normal_out = normal_in ;
+	mat4 normalMatrix = transpose(inverse(modelMatrix));
+	normal_out = (normalMatrix * vec4(normal_in, 1.0)).xyz;
+	normal_out = normalize(normal_out);
 }

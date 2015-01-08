@@ -4,6 +4,7 @@
 //
 
 #pragma once
+#define GLM_SWIZZLE
 
 #include "targetver.h"
 

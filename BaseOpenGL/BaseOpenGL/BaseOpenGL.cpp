@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "ShaderProgram.h"
 #include "BasicRenderableObject.h"
-#include "SceneGraph.h"
+
 
 
 
@@ -13,8 +13,12 @@
 // Variables globales pour la gestion de l'application //
 /////////////////////////////////////////////////////////
 
+
+
 int				g_width = 800;
 int				g_height = 600;
+int				centreX = g_width/2;
+int				centreY = g_height/2;
 
 float			g_PreviousXPosition;
 float			g_PreviousYPosition;
@@ -23,8 +27,8 @@ bool			g_RightButtonPressed;
 
 double			yAngle = 0.0;
 double			xAngle = 0.0;
-float			sensibilityX = .15f;
-float			sensibilityY = 1.0f;
+float			sensibilityX = .65f;
+float			sensibilityY = .70f;
 
 double			g_CurrentTime;
 double			g_PreviousTime;
@@ -35,12 +39,14 @@ Light*			g_Light = new Light ();
 Light*			g_Light2 = new Light ();
 
 BasicRenderableObject*				g_Enterprise;
+BasicRenderableObject*				g_Enterprise2;
 BasicRenderableObject*				g_Church;
+BasicRenderableObject*				g_Sky;
 
 enum mode {CAMERA , ENTERPRISE , CHURCH} ; // Pour savoir quel objet on selectionne.
 enum mode currentMode = CAMERA ; // Par defaut, l'ensemble de la scene.
 
-SceneGraph * g = new SceneGraph () ;
+
 
 
 
@@ -80,7 +86,22 @@ void initialiseObjects()
 	g_Enterprise->fillInVBO();
 	g_Enterprise->createVertexArrayObject();
 	
-	g_Enterprise -> rotateLocalObject (90 , 0 , 1 , 0) ;
+	
+	
+	//g_Enterprise -> rotateGlobalObject (90 , 0 , 1 , 0) ;
+	
+
+	g_Enterprise2 = new BasicRenderableObject();
+	g_Enterprise2->initShader( ShaderProgram::createAmbientMapShader() );
+	g_Enterprise2->init();
+	g_Enterprise2->loadMtl("Models/USSEnterprise.mtl");
+	g_Enterprise2->loadObj("Models/USSEnterprise.obj");
+	g_Enterprise2->fillInVBO();
+	g_Enterprise2->createVertexArrayObject();
+	
+	//g_Enterprise-> translateLocalObject(5, -1.5, 0);
+	g_Enterprise -> rotateGlobalObject (90 , 0 , 1 , 0) ;
+	
 
 	g_Church = new BasicRenderableObject();
 	g_Church->initShader(ShaderProgram::createAmbientMapShader());
@@ -90,6 +111,19 @@ void initialiseObjects()
 	g_Church->fillInVBO();
 	g_Church->createVertexArrayObject();
 
+	g_Sky = new BasicRenderableObject();
+	g_Sky->initShader(ShaderProgram::createStdShader());
+	g_Sky->init();
+	g_Sky->loadMtl("Models/Environment5.mtl");
+	g_Sky->loadObj("Models/Environment5.obj");
+	g_Sky->fillInVBO();
+	g_Sky->createVertexArrayObject();
+	
+	g_Enterprise2 -> setParent (g_Enterprise) ;
+
+	g_Enterprise-> translateGlobalObject(0, 0, 30);
+	g_Enterprise2->translateLocalObject(10, 10, -10);
+	
 	printGLErrors("initialiseObjects() end");
 }
 
@@ -100,9 +134,17 @@ void display()
 	g_CurrentTime = glfwGetTime();
 	
 	g_Enterprise->draw(g_Enterprise -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+	g_Enterprise2->draw(g_Enterprise2 -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
 	g_Church->draw(g_Church -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+	g_Sky->draw(g_Church -> getModelMatrix () , g_Camera->GetViewMatrix(), g_Camera->GetProjectionMatrix() , g_Light);
+			
+	// TEST DU GRAPHE DE SCENE !
+	//g_Enterprise-> translateGlobalObject(0, 0, -30);
 	
-	
+	//g_Enterprise-> translateGlobalObject(0, 0, -30);
+	g_Enterprise -> rotateGlobalObject (0.1 , 1 , 0.0 , 0.0) ;
+	//g_Enterprise-> translateGlobalObject(0, 0, 30);
+	//g_Enterprise->translateGlobalObject(0, 1.5, 0);
 
 	g_PreviousTime = g_CurrentTime;
 
@@ -138,11 +180,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 		else if (currentMode == ENTERPRISE)
 		{
-			//g_Enterprise->translateGlobalObject(0.0f, 0.0f, 1.0f);
-			
-	g_Enterprise->translateLocalObject(0, -1.5, 0);
-	g_Enterprise -> rotateLocalObject (0.75 , 1 , 0 , 0) ;
-	g_Enterprise->translateLocalObject(0, 1.5, 0);
+			g_Enterprise->translateLocalObject(0.0f, 0.0f, 1.0f);
 		}
 		else if (currentMode == CHURCH)
 		{
@@ -172,7 +210,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 		else if (currentMode == ENTERPRISE)
 		{
-			g_Enterprise->translateGlobalObject(1.0f, 0.0f, 0.0f);
+			g_Enterprise->translateLocalObject(1.0f, 0.0f, 0.0f);
 		}
 		else if (currentMode == CHURCH)
 		{
@@ -207,12 +245,10 @@ void mouseButton_callback(GLFWwindow* window, int button, int action, int mods)
 	{
 		if(action == GLFW_PRESS)
 		{
-			g_LeftButtonPressed = true;
+			g_LeftButtonPressed = !g_LeftButtonPressed;
+			glfwSetCursorPos(window , centreX , centreY);
 		}
-		else if(action == GLFW_RELEASE)
-		{
-			g_LeftButtonPressed = false;
-		}
+		
 	}
 
 	if(button == GLFW_MOUSE_BUTTON_RIGHT)
@@ -230,18 +266,21 @@ void mouseButton_callback(GLFWwindow* window, int button, int action, int mods)
 
 void mouseMove_callback(GLFWwindow* window, double x, double y)
 {
+	
 	if(g_LeftButtonPressed)
-	{
-		xAngle =  ( x - g_PreviousXPosition ) * sensibilityX;
-		yAngle =  ( y - g_PreviousYPosition ) * sensibilityY;
-		g_Camera -> deltaX = xAngle;
-		g_Camera -> deltaY = yAngle;
+	{		
+		// on enleve la rotation sur Y pour appliquer la rotation horizontale a plat.
+		g_Camera->rotateLocal((float)yAngle * -0.5f, 1.0f, 0.0f, 0.0f);		
+		
+		yAngle = yAngle + (y - centreY)* sensibilityY;
+		xAngle = (x - centreX) * sensibilityX;
 
-		g_Camera -> Update();
+
+		g_Camera->rotateLocal((float)xAngle * 0.5f, 0.0f, 1.0f, 0.0f);
+		g_Camera->rotateLocal((float)yAngle * 0.5f, 1.0f, 0.0f, 0.0f);
+
+		glfwSetCursorPos(window , g_width/2 , g_height/2);
 	}
-
-	g_PreviousXPosition = (float) x;
-	g_PreviousYPosition = (float) y;
 }
 
 
